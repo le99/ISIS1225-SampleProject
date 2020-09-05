@@ -21,11 +21,9 @@
  """
 
 import sys
-import config
-from DISClib.ADT import list as lt
-from DISClib.DataStructures import listiterator as it
-from App import controller
-assert config
+from .DISClib.ADT import list as lt
+from .DISClib.DataStructures import listiterator as it
+from . import controller
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -39,9 +37,9 @@ operación seleccionada.
 # ___________________________________________________
 
 
-booksfile = 'GoodReads/books-small.csv'
-tagsfile = 'GoodReads/tags.csv'
-booktagsfile = 'GoodReads/book_tags-small.csv'
+booksfile = './Data/GoodReads/books-small.csv'
+tagsfile = './Data/GoodReads/tags.csv'
+booktagsfile = './Data/GoodReads/book_tags-small.csv'
 
 
 # ___________________________________________________
@@ -109,36 +107,37 @@ def printMenu():
 """
 Menu principal
 """
-while True:
-    printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
+def run():   
+    while True:
+        printMenu()
+        inputs = input('Seleccione una opción para continuar\n')
 
-    if int(inputs[0]) == 1:
-        print("Inicializando Catálogo ....")
-        # cont es el controlador que se usará de acá en adelante
-        cont = controller.initCatalog()
+        if int(inputs[0]) == 1:
+            print("Inicializando Catálogo ....")
+            # cont es el controlador que se usará de acá en adelante
+            cont = controller.initCatalog()
 
-    elif int(inputs[0]) == 2:
-        print("Cargando información de los archivos ....")
-        controller.loadData(cont, booksfile, tagsfile, booktagsfile)
-        print('Libros cargados: ' + str(controller.booksSize(cont)))
-        print('Autores cargados: ' + str(controller.authorsSize(cont)))
-        print('Géneros cargados: ' + str(controller.tagsSize(cont)))
+        elif int(inputs[0]) == 2:
+            print("Cargando información de los archivos ....")
+            controller.loadData(cont, booksfile, tagsfile, booktagsfile)
+            print('Libros cargados: ' + str(controller.booksSize(cont)))
+            print('Autores cargados: ' + str(controller.authorsSize(cont)))
+            print('Géneros cargados: ' + str(controller.tagsSize(cont)))
 
-    elif int(inputs[0]) == 3:
-        number = input("Buscando libros del año?: ")
-        books = controller.getBooksYear(cont, int(number))
-        printBooksbyYear(books)
+        elif int(inputs[0]) == 3:
+            number = input("Buscando libros del año?: ")
+            books = controller.getBooksYear(cont, int(number))
+            printBooksbyYear(books)
 
-    elif int(inputs[0]) == 4:
-        authorname = input("Nombre del autor a buscar: ")
-        authorinfo = controller.getBooksByAuthor(cont, authorname)
-        printAuthorData(authorinfo)
+        elif int(inputs[0]) == 4:
+            authorname = input("Nombre del autor a buscar: ")
+            authorinfo = controller.getBooksByAuthor(cont, authorname)
+            printAuthorData(authorinfo)
 
-    elif int(inputs[0]) == 5:
-        label = input("Etiqueta a buscar: ")
-        books = controller.getBooksByTag(cont, label)
-        printBooksbyTag(books)
-    else:
-        sys.exit(0)
-sys.exit(0)
+        elif int(inputs[0]) == 5:
+            label = input("Etiqueta a buscar: ")
+            books = controller.getBooksByTag(cont, label)
+            printBooksbyTag(books)
+        else:
+            sys.exit(0)
+    sys.exit(0)

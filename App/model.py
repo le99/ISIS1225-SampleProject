@@ -19,11 +19,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-import config
-from DISClib.ADT import list as lt
-from DISClib.ADT import map as mp
-from DISClib.DataStructures import mapentry as me
-assert config
+from .DISClib.ADT import list as lt
+from .DISClib.ADT import map as mp
+from .DISClib.DataStructures import mapentry as me
 
 """
 En este archivo definimos los TADs que vamos a usar,

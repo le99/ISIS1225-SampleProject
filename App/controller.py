@@ -20,10 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-import config as cf
-from App import model
+from . import model
 import csv
-
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -36,7 +34,6 @@ recae sobre el controlador.
 # ___________________________________________________
 #  Inicializacion del catalogo
 # ___________________________________________________
-
 
 def initCatalog():
     """
@@ -68,7 +65,7 @@ def loadBooks(catalog, booksfile):
     - Por cada libro se encuentran sus autores y por cada
       autor, se crea una lista con sus libros
     """
-    booksfile = cf.data_dir + booksfile
+    booksfile = booksfile
     input_file = csv.DictReader(open(booksfile))
     for book in input_file:
         model.addBook(catalog, book)
@@ -82,7 +79,7 @@ def loadTags(catalog, tagsfile):
     Carga en el catalogo los tags a partir de la informacion
     del archivo de etiquetas
     """
-    tagsfile = cf.data_dir + tagsfile
+    tagsfile = tagsfile
     input_file = csv.DictReader(open(tagsfile))
     for tag in input_file:
         model.addTag(catalog, tag)
@@ -94,7 +91,7 @@ def loadBooksTags(catalog, booktagsfile):
     Primero se localiza el tag y se le agrega la información leida.
     Adicionalmente se le agrega una referencia al libro procesado.
     """
-    booktagsfile = cf.data_dir + booktagsfile
+    booktagsfile = booktagsfile
     input_file = csv.DictReader(open(booktagsfile))
     for tag in input_file:
         model.addBookTag(catalog, tag)
